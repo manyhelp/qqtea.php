@@ -34,8 +34,8 @@ class QQTEA {
 		$data = self::stringToLongArray($v);
 
 		while($n-- > 0){
-			$data[0] += (($data[1] << 4) + $key[0]) ^ ($data[1] + $sum) ^ (($data[1] >> 5) & 0x7ffffff) + $key[1];
-			$data[1] += (($data[0] << 4) + $key[2]) ^ ($data[0] + $sum) ^ (($data[0] >> 5) & 0x7ffffff) + $key[3];
+			$data[0] += ((($data[1] << 4) & 0xFFFFFFF0) + $key[0]) ^ ($data[1] + $sum) ^ (($data[1] >> 5) & 0x7ffffff) + $key[1];
+			$data[1] += ((($data[0] << 4) & 0xFFFFFFF0) + $key[2]) ^ ($data[0] + $sum) ^ (($data[0] >> 5) & 0x7ffffff) + $key[3];
 
 			$sum += self::DELTA;
 		}
